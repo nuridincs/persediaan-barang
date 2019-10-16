@@ -101,7 +101,25 @@ class M_admin extends CI_Model
     return $query->result();
   }
   
+  public function getData($type) {
+    if ($type === 'po') {
+      $sql = "select * from master_barang
+              inner join status_barang on status_barang.id = master_barang.id_status_barang";
+    }
 
+    $query = $this->db->query($sql);
+    return $query->result();
+  }
+
+  public function execute($action, $type, $data) {
+    if ($action == 'insert') {
+      if ($type == 'insertPO') {
+        // echo "<pre>";
+        // print_r($data);
+        $this->db->insert('master_barang', $data);
+      }
+    }
+  }
 
 }
 

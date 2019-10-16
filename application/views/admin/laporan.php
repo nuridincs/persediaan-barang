@@ -1,18 +1,18 @@
- <?php $this->load->view('layout/head'); ?>
+  <?php $this->load->view('layout/head'); ?>
   <?php $this->load->view('layout/header'); ?>
   <!-- Left side column. contains the logo and sidebar -->
   <?php $this->load->view('layout/sidebar'); ?>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Tabel Users
+        Laporann
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?=base_url('admin')?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?=base_url('admin/users')?>" class="active">Users</a></li>
+        <li>Tables</li>
+        <li class="active"><a href="<?=base_url('admin/tabel_barangmasuk')?>">laporan</li>
       </ol>
     </section>
 
@@ -24,7 +24,7 @@
           <!-- /.box -->
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Users</h3>
+              <h3 class="box-title"><i class="fa fa-table" aria-hidden="true"></i> Laporan</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -36,37 +36,59 @@
                </div>
               <?php } ?>
 
-              <a href="<?=base_url('admin/form_user')?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data</a>
+              <?php if($this->session->flashdata('msg_berhasil_keluar')){ ?>
+                <div class="alert alert-success alert-dismissible" style="width:100%">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong><br> <?php echo $this->session->flashdata('msg_berhasil_keluar');?>
+               </div>
+              <?php } ?>
+
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Last Login</th>
-                  <th>Update</th>
-                  <th>Delete</th>
+                  <th>No</th>
+                  <th>Tanggal</th>
+                  <th>Kode Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Jenis Barang</th>
+                  <th>Minimal Stock</th>
+                  <th>Stock Awal</th>
+                  <th>Stock Akhir</th>
+                  <th>Keterangan</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <?php if(is_array($list_users)){ ?>
-                  <?php foreach($list_users as $dd): ?>
-                    <td><?=$dd->username?></td>
-                    <td><?=$dd->email?></td>
-                    <?php if($dd->role == 1){ ?>
-                    <td>User Admin</td>
-                    <?php }else{?>
-                    <td>User Biasa</td>
-                    <?php }?>
-                    <td><?=$dd->last_login?></td>
-                    <td><a type="button" class="btn btn-info"  href="<?=base_url('admin/update_user/'.$dd->id)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                    <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('admin/proses_delete_user/'.$dd->id)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                </tr>
-              <?php endforeach;?>
-              <?php }else { ?>
-                    <td colspan="7" align="center"><strong>Data Kosong</strong></td>
-              <?php } ?>
+                  <tr>
+                    <td>1</td>
+                    <td>30 September 2019</td>
+                    <td>B1200055</td>
+                    <td>Speaker</td>
+                    <td>Electronic</td>
+                    <td>10</td>
+                    <td>100</td>
+                    <td>50</td>
+                    <td>Stock Aman</td>
+                  </tr>
+                <!-- <tr>
+                  <?php //if(is_array($list_data)){ ?>
+                  <?php //$no = 1;?>
+                  <?php f//oreach($list_data as $dd): ?>
+                    <td><?php //echo $no?></td>
+                    <td><?php //echo $dd->id_transaksi?></td>
+                    <td><?php //echo $dd->tanggal?></td>
+                    <td><?php //echo $dd->kode_barang?></td>
+                    <td><?php //echo $dd->nama_barang?></td>
+                    <td><?php //echo $dd->jumlah?></td>
+                    <td><?php //echo $dd->satuan?></td>
+                    <td><a type="button" class="btn btn-info"  href="<?php //echo base_url('admin/update_barang/'.$dd->id_transaksi)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                    <td><a type="button" class="btn btn-danger btn-delete"  href="<?php //echo base_url('admin/delete_barang/'.$dd->id_transaksi)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                    <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?php //echo base_url('admin/barang_keluar/'.$dd->id_transaksi)?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td>
+                </tr> -->
+              <?php //$no++; ?>
+              <?php// endforeach;?>
+              <?php //}else { ?>
+                    <!-- <td colspan="7" align="center"><strong>Data Kosong</strong></td> -->
+              <?php //} ?>
                 </tbody>
               </table>
             </div>
@@ -74,6 +96,9 @@
           </div>
 
 
+
+          <!-- /.box -->
+        </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -320,15 +345,7 @@ jQuery(document).ready(function($){
   });
 
   $(function () {
-    $('#example1').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : false,
-      'info'        : true,
-      'autoWidth'   : false
-
-    })
+    $('#example1').DataTable()
     $('#example2').DataTable({
       'paging'      : true,
       'lengthChange': false,

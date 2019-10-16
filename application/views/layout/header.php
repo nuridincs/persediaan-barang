@@ -31,7 +31,7 @@
               <?php } ?>
 
               <p>
-                <?=$this->session->userdata('name')?> - Web Developer
+                <?=$this->session->userdata('name')?>
                 <small>Last Login : <?=$this->session->userdata('last_login')?></small>
               </p>
             </li>

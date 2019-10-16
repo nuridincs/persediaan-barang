@@ -83,18 +83,6 @@
                     <td colspan="7" align="center"><strong>Data Kosong</strong></td>
               <?php } ?>
                 </tbody>
-                <tfoot>
-                <tr>
-                  <th>No</th>
-                  <th>ID_transaksi</th>
-                  <th>Tanggal</th>
-                  <th>Lokasi</th>
-                  <th>Kode Barang</th>
-                  <th>Nama Barang</th>
-                  <th>Satuan</th>
-                  <th>Jumlah</th>
-                </tr>
-                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->

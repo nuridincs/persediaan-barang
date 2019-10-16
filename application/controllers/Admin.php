@@ -7,6 +7,11 @@ class Admin extends CI_Controller{
 		parent::__construct();
     $this->load->model('M_admin');
     $this->load->library('upload');
+
+    $cekUserLogin = $this->session->userdata('status');
+    if (!$cekUserLogin) {
+      redirect('login');
+    }
 	}
 
   public function index(){
@@ -519,6 +524,43 @@ class Admin extends CI_Controller{
     $this->load->view('admin/tabel/tabel_barangkeluar',$data);
   }
 
+  public function kelolaPO() {
+    $data = array(
+        'list_data' => $this->M_admin->getData('po'),
+        'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user',$this->session->userdata('name'))
+      );
+    // echo "<pre>";
+    // print_r($data);die;
+    $this->load->view('admin/kelolaPO',$data);
+  }
+
+  public function laporan() {
+    $data = array(
+        'list_data' => $this->M_admin->select('tb_barang_masuk'),
+        'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user',$this->session->userdata('name'))
+      );
+    $this->load->view('admin/laporan',$data);
+  }
+
+  public function formInsertPO() {
+    $data = array(
+        'list_data' => $this->M_admin->select('tb_barang_masuk'),
+        'list_satuan' => $this->M_admin->select('tb_satuan'),
+        'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user',$this->session->userdata('name'))
+      );
+    $this->load->view('admin/form_po/form_insert',$data);
+  }
+
+  public function process($type) {
+    $data = $this->input->post();
+    if ($type == 'insertPO') {
+      $this->M_admin->execute('insert', 'insertPO', $data);
+    }
+
+    
+    redirect('admin/kelolaPO');
+
+  }
 
 }
 ?>
