@@ -8,12 +8,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Input Data Barang Masuk
+        Update Data Barang Masuk
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Forms</a></li>
-        <li class="active">Data Barang Masuk</li>
+        <li class="active">General Elements</li>
       </ol>
     </section>
 
@@ -26,77 +26,125 @@
             <!-- general form elements -->
           <div class="box box-primary" style="width:94%;">
             <div class="box-header with-border">
-              <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Data Barang Masuk</h3>
+              <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Update Data Barang Masuk</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <div class="container">
-            <form action="<?=base_url('admin/process/insertBarangMasuk')?>" role="form" method="post">
+            <form action="<?=base_url('admin/proses_databarang_masuk_update')?>" role="form" method="post">
 
-              <!-- <?php //if($this->session->flashdata('msg_berhasil')){ ?>
-                <div class="alert alert-success alert-dismissible" style="width:91%">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Success!</strong><br> <?php //echo $this->session->flashdata('msg_berhasil');?>
-               </div>
-              <?php //} ?>
-
-              <?php //if(validation_errors()){ ?>
+              <?php if(validation_errors()){ ?>
               <div class="alert alert-warning alert-dismissible">
                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>Warning!</strong><br> <?php //echo validation_errors(); ?>
+                  <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
              </div>
-            <?php //} ?> -->
+            <?php } ?>
 
               <div class="box-body">
                 <div class="form-group">
+                  <?php foreach($data_barang_update as $d){ ?>
                   <label for="id_transaksi" style="margin-left:220px;display:inline;">ID Transaksi</label>
-                  <input type="text" name="id_transaksi" style="margin-left:37px;width:20%;display:inline;" class="form-control" readonly="readonly" value="BM-<?=date("Y");?><?=random_string('numeric', 8);?>">
+                  <input type="text" name="id_transaksi" style="margin-left:37px;width:20%;display:inline;" class="form-control" readonly="readonly" value="<?=$d->id_transaksi?>">
                 </div>
                 <div class="form-group">
                   <label for="tanggal" style="margin-left:220px;display:inline;">Tanggal</label>
-                  <input type="text" name="tanggal" required style="margin-left:66px;width:20%;display:inline;" class="form-control form_datetime" placeholder="Klik Disini">
+                  <input type="text" name="tanggal" style="margin-left:66px;width:20%;display:inline;" class="form-control" readonly="readonly" value="<?=$d->tanggal?>">
                 </div>
-                <br><br>
-                <div class="row">
-                  <div class="col-sm-3">
-                    <div class="form-group">
-                      <label for="nama_Barang" style="width:73%;">Nama Barang</label>
-                      <select class="form-control" name="kode_barang" required>
-                        <option value="" selected="">-- Pilih --</option>
-                        <?php foreach($dataBarang as $s){ ?>
-                        <option value="<?=$s->kode_barang?>"><?=$s->nama_barang?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="form-group">
-                      <label for="satuan" style="width:73%;">Keterangan</label>
-                      <input type="text" name="keterangan" style="width:90%;margin-right: 67px;" class="form-control" id="keterangan" placeholder="Keterangan">
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="form-group">
-                      <label for="jumlah">Jumlah</label>
-                      <input type="number" name="jumlah" required class="form-control" id="jumlah">
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="form-group" style="margin-top: 25px;">
-                      <button type="reset" class="btn btn-basic" name="btn_reset"><i class="fa fa-eraser" aria-hidden="true"></i> Reset</button>
-                    </div>
-                  </div>
+                <div class="form-group" style="margin-bottom:40px;">
+                  <label for="nama_barang" style="margin-left:220px;display:inline;">Lokasi</label>
+                  <select class="form-control" name="lokasi" style="margin-left:75px;width:20%;display:inline;">
+                    <option value="<?=$d->lokasi?>"><?=$d->lokasi?></option>
+                    <option value="">-- Pilih --</option>
+                    <option value="Aceh">Aceh</option>
+                    <option value="Bali">Bali</option>
+                    <option value="Bengkulu">Bengkulu</option>
+                    <option value="Jakarta">Jakarta Raya</option>
+                    <option value="Jambi">Jambi</option>
+                    <option value="Jawa Tengah">Jawa Tengah</option>
+                    <option value="Jawa Timur">Jawa Timur</option>
+                    <option value="Jawa Barat">Jawa Barat</option>
+                    <option value="Papua">Papua</option>
+                    <option value="Yogyakarta">Yogyakarta</option>
+                    <option value="Kalimantan Barat">Kalimantan Barat</option>
+                    <option value="Kalimantan Selatan">Kalimantan Selatan</option>
+                    <option value="Kalimantan Tengah">Kalimantan Tengah</option>
+                    <option value="Kalimantan Timur">Kalimantan Timur</option>
+                    <option value="Lampung">Lampung</option>
+                    <option value="NTB">Nusa Tenggara Barat</option>
+                    <option value="NTT">Nusa Tenggara Timur</option>
+                    <option value="Riau">Riau</option>
+                    <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                    <option value="Sulawesi Tengah">Sulawesi Tengah</option>
+                    <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
+                    <option value="Sumatera Barat">Sumatera Barat</option>
+                    <option value="Sumatera Utara">Sumatera Utara</option>
+                    <option value="Maluku">Maluku</option>
+                    <option value="Maluku Utara">Maluku Utara</option>
+                    <option value="Sulawesi Utara">Sulawesi Utara</option>
+                    <option value="Sulawesi Selatan">Sumatera Selatan</option>
+                    <option value="Banten">Banten</option>
+                    <option value="Gorontalo">Gorontalo</option>
+                    <option value="Bangka">Bangka Belitung</option>
+                  </select>
                 </div>
+                <div class="form-group" style="display:inline-block;">
+                  <label for="kode_barang" style="width:87%;margin-left: 12px;">Kode Barang / Barcode</label>
+                  <input type="text" name="kode_barang" required style="width: 90%;margin-right: 67px;margin-left: 11px;" class="form-control" id="kode_barang" value="<?=$d->kode_barang?>">
+                </div>
+                <div class="form-group" style="display:inline-block;">
+                  <label for="nama_Barang" style="width:73%;">Nama Barang</label>
+                  <input type="text" name="nama_barang" required style="width:90%;margin-right: 67px;" class="form-control" id="nama_Barang" value="<?=$d->nama_barang?>">
+              </div>
+                <div class="form-group" style="display:inline-block;">
+                  <label for="satuan" style="width:73%;">Satuan</label>
+                  <select class="form-control" name="satuan" style="width:110%;margin-right: 18px;">
+                    <?php foreach($list_satuan as $s){?>
+                      <?php if($d->satuan == $s->nama_satuan){?>
+                    <option value="<?=$d->satuan?>" selected=""><?=$d->satuan?></option>
+                    <?php }else{?>
+                    <option value="<?=$s->kode_satuan?>"><?=$s->nama_satuan?></option>
+                      <?php } ?>
+                      <?php } ?>
+                  </select>
+              </div>
+              <div class="form-group" style="display:inline-block;">
+                <label for="jumlah" style="width:73%;margin-left:33px;">Jumlah</label>
+                <input type="number" name="jumlah" style="width:41%;margin-left:34px;margin-right:18px;" class="form-control" id="jumlah" value="<?=$d->jumlah?>">
+            </div>
+            <?php } ?>
               <!-- /.box-body -->
+
               <div class="box-footer" style="width:93%;">
-                <a type="button" class="btn btn-default" style="width:10%;margin-right:26%" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
-                <a type="button" class="btn btn-info" style="width:14%;margin-right:29%" href="<?=base_url('admin/tabel_barangmasuk')?>" name="btn_listbarang"><i class="fa fa-table" aria-hidden="true"></i> Lihat List Barang</a>
-                <button type="submit" style="width:20%" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>
+                <a type="button" class="btn btn-default" style="width:10%" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
+                <button type="submit" style="width:20%;margin-left:689px;" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
               </div>
             </form>
           </div>
           </div>
+          <!-- /.box -->
+
+          <!-- Form Element sizes -->
+
+          <!-- /.box -->
+
+
+          <!-- /.box -->
+
+          <!-- Input addon -->
+
+          <!-- /.box -->
+
         </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <!-- <div class="col-md-6">
+          <!-- Horizontal Form -->
+
+          <!-- /.box -->
+          <!-- general form elements disabled -->
+
+          <!-- /.box -->
+
         </div>
         </div>
         <!--/.col (right) -->
@@ -111,6 +159,7 @@
       <b>Version</b> 2.4.0
     </div>
     <strong>Copyright &copy; <?=date('Y')?></strong>
+    
   </footer>
 
   <!-- Control Sidebar -->
@@ -317,19 +366,7 @@
   <script src="<?php echo base_url()?>assets/web_admin/bower_components/fastclick/lib/fastclick.js"></script>
   <!-- AdminLTE App -->
   <script src="<?php echo base_url()?>assets/web_admin/dist/js/adminlte.min.js"></script>
-  <script src="<?php echo base_url()?>assets/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="<?php echo base_url()?>assets/web_admin/dist/js/demo.js"></script>
-
-  <script type="text/javascript">
-      $(".form_datetime").datetimepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        todayBtn: true,
-        pickTime: false,
-        minView: 2,
-        maxView: 4,
-      });
-  </script>
   </body>
   </html>

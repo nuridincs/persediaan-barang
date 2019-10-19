@@ -101,10 +101,25 @@ class M_admin extends CI_Model
     return $query->result();
   }
   
-  public function getData($type) {
+  public function getData($type, $id="") {
     if ($type === 'po') {
       $sql = "select * from master_barang
               inner join status_barang on status_barang.id = master_barang.id_status_barang";
+    } elseif ($type === 'stok_limit') {
+      $sql = "select count(*) as stok_limit from master_barang
+              inner join status_barang on status_barang.id = master_barang.id_status_barang
+              where id_status_barang = 1
+              and sisa_stok <= stok_minimum
+              ";
+    } elseif ($type === 'getStokLimit') {
+      $sql = "select * from master_barang
+              inner join status_barang on status_barang.id = master_barang.id_status_barang
+              where id_status_barang = 1
+              and sisa_stok <= stok_minimum
+              ";
+    } elseif ($type === 'getBarang') {
+      $condition = !empty($id) ? " and kode_barang='$id'" : '';
+      $sql = "select * from master_barang where id_status_barang=1".$condition;
     }
 
     $query = $this->db->query($sql);
@@ -114,9 +129,33 @@ class M_admin extends CI_Model
   public function execute($action, $type, $data) {
     if ($action == 'insert') {
       if ($type == 'insertPO') {
-        // echo "<pre>";
-        // print_r($data);
         $this->db->insert('master_barang', $data);
+      }elseif ($type == 'BarangKeluar') {
+        $sisa_stok = $data['cekStok'][0]->sisa_stok - $data['jumlah'];
+        $paramBarang = array(
+          'kode_barang' => $data['cekStok'][0]->kode_barang,
+          'sisa_stok' => $sisa_stok
+        );
+
+        $dataBarangKeluar = array(
+          'id_transaksi' => $data['id_transaksi'],
+          'tanggal_keluar' => $data['tanggal_keluar'],
+          'kode_barang' => $data['kode_barang'],
+          'jumlah' => $data['jumlah'],
+          'keterangan' => $data['keterangan'],
+        );
+
+        $this->execute('update','masterBarang', $paramBarang);
+        $this->db->insert('tb_barang_keluar', $dataBarangKeluar);
+      }elseif ($type == 'BarangMasuk') {
+        echo "<pre>";
+        print_r($data);die;
+      }
+    } elseif($action == 'update') {
+      if ($type == 'masterBarang') {
+        $this->db->where('kode_barang', $data['kode_barang']);
+        $this->db->update('master_barang', array('sisa_stok' => $data['sisa_stok']));
+
       }
     }
   }

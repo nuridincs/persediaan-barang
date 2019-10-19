@@ -10,9 +10,9 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url()?>assets/web_admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
-<script src="<?php echo base_url()?>assets/web_admin/bower_components/raphael/raphael.min.js"></script>
-<script src="<?php echo base_url()?>assets/web_admin/bower_components/morris.js/morris.min.js"></script>
-<!-- Sparkline -->
+<!-- <script src="<?php //echo base_url()?>assets/web_admin/bower_components/raphael/raphael.min.js"></script>
+<script src="<?php //echo base_url()?>assets/web_admin/bower_components/morris.js/morris.min.js"></script>
+ --><!-- Sparkline -->
 <script src="<?php echo base_url()?>assets/web_admin/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
 <script src="<?php echo base_url()?>assets/web_admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -21,7 +21,7 @@
 <script src="<?php echo base_url()?>assets/web_admin/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
 <script src="<?php echo base_url()?>assets/web_admin/bower_components/moment/min/moment.min.js"></script>
-<script src="<?php echo base_url()?>assets/web_admin/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- <script src="<?php //echo base_url()?>assets/web_admin/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script> -->
 <!-- datepicker -->
 <script src="<?php echo base_url()?>assets/web_admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
@@ -33,7 +33,7 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url()?>assets/web_admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url()?>assets/web_admin/dist/js/pages/dashboard.js"></script>
+<!-- <script src="<?php //echo base_url()?>assets/web_admin/dist/js/pages/dashboard.js"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>assets/web_admin/dist/js/demo.js"></script>
 </body>

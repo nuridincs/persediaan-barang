@@ -17,9 +17,11 @@ class Admin extends CI_Controller{
   public function index(){
     if($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 1){
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user',$this->session->userdata('name'));
-      $data['stokBarangMasuk'] = $this->M_admin->sum('tb_barang_masuk','jumlah');
-      $data['stokBarangKeluar'] = $this->M_admin->sum('tb_barang_keluar','jumlah');      
-      $data['dataUser'] = $this->M_admin->numrows('user');
+      // $data['stokBarangMasuk'] = $this->M_admin->sum('tb_barang_masuk','jumlah');
+      // $data['stokBarangKeluar'] = $this->M_admin->sum('tb_barang_keluar','jumlah');      
+      // $data['dataUser'] = $this->M_admin->numrows('user');
+      $data['limit'] = $this->M_admin->getData('stok_limit');
+      // print_r($data['stok_limit']);die;
       $this->load->view('admin/index',$data);
     }else {
       $this->load->view('login/login');
@@ -265,8 +267,17 @@ class Admin extends CI_Controller{
   public function form_barangmasuk()
   {
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
+    $data['dataBarang'] = $this->M_admin->getData('getBarang');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user',$this->session->userdata('name'));
     $this->load->view('admin/form_barangmasuk/form_insert',$data);
+  }
+
+  public function form_barangkeluar()
+  {
+    $data['list_satuan'] = $this->M_admin->select('tb_satuan');
+    $data['dataBarang'] = $this->M_admin->getData('getBarang');
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user',$this->session->userdata('name'));
+    $this->load->view('admin/form_barangkeluar/form_insert',$data);
   }
 
   public function tabel_barangmasuk()
@@ -529,8 +540,6 @@ class Admin extends CI_Controller{
         'list_data' => $this->M_admin->getData('po'),
         'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user',$this->session->userdata('name'))
       );
-    // echo "<pre>";
-    // print_r($data);die;
     $this->load->view('admin/kelolaPO',$data);
   }
 
@@ -555,11 +564,32 @@ class Admin extends CI_Controller{
     $data = $this->input->post();
     if ($type == 'insertPO') {
       $this->M_admin->execute('insert', 'insertPO', $data);
+      redirect('admin/kelolaPO');
+    }elseif ($type == 'insertBarangKeluar') {
+      $data['cekStok'] = $this->M_admin->getData('getBarang', $data['kode_barang']);
+
+      if ( ($data['cekStok'][0]->sisa_stok) <= ($data['cekStok'][0]->stok_minimum)) {
+        $this->session->set_flashdata('msg_error','Jumlah Stok Barang yang Anda inginkan kurang dalam batas limit, silahkan lakukan PO');
+        redirect(base_url('admin/form_barangkeluar'));
+      }
+
+      if ( ($data['cekStok'][0]->sisa_stok) <= ($data['jumlah'])) {
+        $this->session->set_flashdata('msg_error','Jumlah Stok Barang yang Anda inginkan dalam batas limit, silahkan lakukan PO');
+        redirect(base_url('admin/form_barangkeluar'));
+      }
+      $this->M_admin->execute('insert', 'BarangKeluar', $data);
+      redirect('admin/tabel_barangkeluar');
+    }elseif ($type == 'insertBarangMasuk') {
+      $this->M_admin->execute('insert', 'BarangMasuk', $data);
     }
 
-    
-    redirect('admin/kelolaPO');
+  }
 
+  public function limitStok(){
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user',$this->session->userdata('name'));
+    // $data['list_data '] = [];
+    $data['limit'] = $this->M_admin->getData('getStokLimit');
+    $this->load->view('admin/limit_stok',$data);
   }
 
 }
