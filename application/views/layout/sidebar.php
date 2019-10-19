@@ -4,9 +4,9 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <?php foreach($avatar as $a){ ?>
-        <img src="<?php echo base_url('assets/upload/user/img/'.$a->nama_file)?>" class="img-circle" alt="User Image">
-        <?php } ?>
+        <?php //foreach($avatar as $a){ ?>
+        <img src="<?php echo base_url('assets/upload/user/img/nopic2.png') ?>" class="img-circle" alt="User Image">
+        <?php //} ?>
       </div>
       <div class="pull-left info">
         <p><?=$this->session->userdata('name')?></p>
@@ -18,10 +18,14 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
 
+      <?php $role = $this->session->userdata('role'); 
+      //print_r($this->session->userdata('role'));die; ?>
+
       <li>
         <a href="<?php echo base_url('admin')?>">
        <i class="fa fa-dashboard" aria-hidden="true"></i> <span>Dashboard</span></a>
       </li>
+      <?php if ($role == 1) { ?>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-table"></i> <span>Data Barang</span>
@@ -35,14 +39,19 @@
           <!-- <li><a href="<?php //echo base_url('admin/tabel_satuan')?>"><i class="fa fa-circle-o"></i> Tabel Satuan</a></li> -->
         </ul>
       </li>
+    <?php } ?>
+      <?php if ($role == 2) { ?>
       <li>
         <a href="<?php echo base_url('admin/kelolaPO')?>">
        <i class="fa fa-cogs" aria-hidden="true"></i> <span>Kelola PO</span></a>
       </li>
+      <?php } ?>
+      <?php if ($role == 1) { ?>
       <li>
         <a href="<?php echo base_url('admin/users')?>">
        <i class="fa fa-fw fa-users" aria-hidden="true"></i> <span>Data Users</span></a>
       </li>
+    <?php } ?>
       <li>
         <a href="<?php echo base_url('admin/laporan')?>">
        <i class="fa fa-cogs" aria-hidden="true"></i> <span>Laporan</span></a>

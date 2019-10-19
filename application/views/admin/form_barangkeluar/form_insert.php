@@ -57,7 +57,7 @@
                       <select class="form-control" name="kode_barang" required>
                         <option value="" selected="">-- Pilih --</option>
                         <?php foreach($dataBarang as $s){ ?>
-                        <option value="<?=$s->kode_barang?>"><?=$s->nama_barang?></option>
+                        <option value="<?=$s->kode_barang?>"><?=$s->kode_barang." ".$s->nama_barang?></option>
                         <?php } ?>
                       </select>
                     </div>

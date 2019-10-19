@@ -120,6 +120,13 @@ class M_admin extends CI_Model
     } elseif ($type === 'getBarang') {
       $condition = !empty($id) ? " and kode_barang='$id'" : '';
       $sql = "select * from master_barang where id_status_barang=1".$condition;
+    } elseif ($type === 'getSupplier') {
+      $sql = "select * from supplier";
+    } elseif ($type === 'getLaporan') {
+      $sql = "select bm.tanggal,bm.kode_barang, mb.nama_barang,mb.stok as stok_awal, 
+        (select sum(jumlah) from tb_barang_masuk where kode_barang=mb.kode_barang) as total_barang_masuk, (select sum(jumlah) from tb_barang_keluar where kode_barang=mb.kode_barang) as total_barang_keluar,mb.sisa_stok from tb_barang_masuk bm
+        left join master_barang mb on mb.kode_barang=bm.kode_barang
+        group by mb.kode_barang";
     }
 
     $query = $this->db->query($sql);
@@ -148,14 +155,17 @@ class M_admin extends CI_Model
         $this->execute('update','masterBarang', $paramBarang);
         $this->db->insert('tb_barang_keluar', $dataBarangKeluar);
       }elseif ($type == 'BarangMasuk') {
-        echo "<pre>";
-        print_r($data);die;
+        $this->execute('update', 'updateStok', $data);
+        $this->db->insert('tb_barang_masuk', $data);
       }
     } elseif($action == 'update') {
       if ($type == 'masterBarang') {
         $this->db->where('kode_barang', $data['kode_barang']);
         $this->db->update('master_barang', array('sisa_stok' => $data['sisa_stok']));
 
+      }elseif ($type == 'updateStok') {
+        $this->db->where('kode_barang', $data['kode_barang']);
+        $this->db->update('master_barang', array('stok' => $data['jumlah'], 'sisa_stok' => $data['jumlah']));
       }
     }
   }

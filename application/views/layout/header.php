@@ -26,29 +26,14 @@
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <?php foreach($avatar as $a){ ?>
-              <img src="<?php echo base_url('assets/upload/user/img/'.$a->nama_file)?>" class="img-circle" alt="User Image">
-              <?php } ?>
+              <?php //foreach($avatar as $a){ ?>
+              <img src="<?php echo base_url('assets/upload/user/img/nopic2.png') ?>" class="img-circle" alt="User Image">
+              <?php //} ?>
 
               <p>
                 <?=$this->session->userdata('name')?>
                 <small>Last Login : <?=$this->session->userdata('last_login')?></small>
               </p>
-            </li>
-            <!-- Menu Body -->
-            <!-- <li class="user-body">
-              <div class="row">
-                <div class="col-xs-4 text-center">
-                  <a href="#">Followers</a>
-                </div>
-                <div class="col-xs-4 text-center">
-                  <a href="#">Sales</a>
-                </div>
-                <div class="col-xs-4 text-center">
-                  <a href="#">Friends</a>
-                </div>
-              </div>
-              <!-- /.row -->
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">

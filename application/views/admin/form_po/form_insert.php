@@ -56,8 +56,18 @@
                   <label for="tanggal" style="margin-left:220px;display:inline;">Tanggal</label>
                   <input type="text" name="tanggal" style="margin-left:66px;width:20%;display:inline;" class="form-control form_datetime" placeholder="Klik Disini">
                 </div>
+                <div class="form-group">
+                  <label for="tanggal" style="margin-left:220px;display:inline;">Supplier</label>
+                  <select class="form-control" name="id_supplier" style="width:230px;margin-left: 60px;display: inline;">
+                    <option value="" selected="">-- Pilih --</option>
+                    <?php foreach($list_supplier as $supplier){ ?>
+                    <option value="<?=$supplier->id_supplier?>"><?=$supplier->nama?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <br><br>
                 <div class="form-group" style="display:inline-block;">
-                  <label for="kode_barang" style="width:87%;margin-left: 12px;">Kode Barang / Barcode</label>
+                  <label for="kode_barang" style="width:87%;margin-left: 12px;">Kode Barang</label>
                   <input type="text" name="kode_barang" style="width: 90%;margin-right: 67px;margin-left: 11px;" class="form-control" id="kode_barang" placeholder="Kode Barang">
                 </div>
                 <div class="form-group" style="display:inline-block;">

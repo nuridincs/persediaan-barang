@@ -201,7 +201,7 @@ footer a, footer a:link {
     <?php }else {
       redirect(base_url());
     }?>
-    <?php echo anchor(base_url('login/register'),'Register') ?><br>
+    <?php //echo anchor(base_url('login/register'),'Register') ?><br>
     <!-- <a href="#">Forgot your password?</a> -->
     <button>
       <!-- <i class="spinner"></i> -->

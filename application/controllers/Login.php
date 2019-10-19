@@ -37,7 +37,6 @@ class Login extends CI_Controller {
 				$this->session->set_flashdata('msg','Username Belum Terdaftar Silahkan Register Dahulu');
 				redirect(base_url());
 			}else {
-
 				$isi = $cek->row();
 				if(password_verify($password,$isi->password) === TRUE){
 					$data_session = array(
@@ -52,12 +51,14 @@ class Login extends CI_Controller {
 					$this->session->set_userdata($data_session);
 
 					$this->M_login->edit_user(['username' => $username],['last_login' => date('d-m-Y G:i')]);
-
-						if($isi->role == 1){
-							redirect(base_url('admin'));
-						}else {
-							redirect(base_url('user'));
-						}
+					redirect(base_url('Admin'));
+					// echo "<pre>";
+					// print_r($data_session);die;
+					// if($isi->role == 1){
+					// 	redirect(base_url('admin'));
+					// }else {
+					// 	redirect(base_url('user'));
+					// }
 
 				}else {
 					$this->session->set_flashdata('msg','Username Dan Password Salah');

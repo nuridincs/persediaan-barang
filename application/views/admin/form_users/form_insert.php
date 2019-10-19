@@ -50,26 +50,27 @@
               <div class="box-body">
                 <div class="form-group" style="display:block;">
                   <label for="username" style="width:87%;margin-left: 0px;">Username</label>
-                  <input type="text" name="username" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
+                  <input type="text" name="username" required style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
                 </div>
                 <div class="form-group" style="display:block;">
                   <label for="email" style="width:73%;">Email</label>
-                  <input type="text" name="email" style="width:30%;margin-right: 67px;" class="form-control" id="email" placeholder="Email">
+                  <input type="text" name="email" required style="width:30%;margin-right: 67px;" class="form-control" id="email" placeholder="Email">
               </div>
                 <div class="form-group" style="display:block;">
                   <label for="password" style="width:73%;">Password</label>
-                  <input type="password" name="password" style="width:30%;margin-right: 67px;" class="form-control" id="password" placeholder="Password">
+                  <input type="password" name="password" required style="width:30%;margin-right: 67px;" class="form-control" id="password" placeholder="Password">
               </div>
                 <div class="form-group" style="display:block;">
                   <label for="confirm_password" style="width:73%;">Confirm Password</label>
-                  <input type="password" name="confirm_password" style="width:30%;margin-right: 67px;" class="form-control" id="confirm_password" placeholder="Confirm Password">
+                  <input type="password" name="confirm_password" required style="width:30%;margin-right: 67px;" class="form-control" id="confirm_password" placeholder="Confirm Password">
               </div>
               <div class="form-group" style="display:block;">
                 <label for="role" style="width:73%;">Role</label>
-                <select class="form-control" name="role" style="width:11%;margin-right: 18px;">
-                  <option value="0" selected=""></option>
-                  <option value="0">User Biasa</option>
-                  <option value="1">User Admin</option>
+                <select class="form-control" required name="role" style="width:11%;margin-right: 18px;">
+                  <option> --Pilih--</option>
+                  <option value="1">Admin Gudang</option>
+                  <option value="2">Purchasing</option>
+                  <option value="3">Manager</option>
                 </select>
             </div>
               <!-- /.box-body -->

@@ -16,7 +16,7 @@
         <li class="active">Dashboard</li>
       </ol>
     </section>
-
+    <?php if ($this->session->userdata('role') == 2) { ?>
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
@@ -37,7 +37,9 @@
       </div>
 
     </section>
-    <!-- /.content -->
+  <?php } else { ?>
+    <h1>Selamat Datang <?php echo $this->session->userdata('nama') ?> di Aplikasi Persediaan Barang</h1>
+  <?php } ?>
   </div>
   <!-- /.content-wrapper -->
   <?php $this->load->view('layout/footer'); ?>

@@ -50,14 +50,10 @@
                   <th>No</th>
                   <th>ID_Transaksi</th>
                   <th>Tanggal</th>
-                  <th>Lokasi</th>
                   <th>Kode Barang</th>
-                  <th>Nama Barang</th>
-                  <th>Satuan</th>
                   <th>Jumlah</th>
                   <th>Update</th>
                   <th>Delete</th>
-                  <th>Keluarkan</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,14 +64,10 @@
                     <td><?=$no?></td>
                     <td><?=$dd->id_transaksi?></td>
                     <td><?=$dd->tanggal?></td>
-                    <td><?=$dd->lokasi?></td>
                     <td><?=$dd->kode_barang?></td>
-                    <td><?=$dd->nama_barang?></td>
-                    <td><?=$dd->satuan?></td>
                     <td><?=$dd->jumlah?></td>
                     <td><a type="button" class="btn btn-info"  href="<?=base_url('admin/update_barang/'.$dd->id_transaksi)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                    <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('admin/delete_barang/'.$dd->id_transaksi)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                    <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?=base_url('admin/barang_keluar/'.$dd->id_transaksi)?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td>
+                    <td><a type="button" class="btn btn-danger btn-delete" onclick="return confirm('Apa Anda yakin ingin menghapus data ini?');"  href="<?=base_url('admin/delete_barang/'.$dd->id_transaksi)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
               <?php $no++; ?>
               <?php endforeach;?>
@@ -129,19 +121,19 @@
 <!-- page script -->
 <script>
 jQuery(document).ready(function($){
-      $('.btn-delete').on('click',function(){
-          var getLink = $(this).attr('href');
-          swal({
-                  title: 'Delete Data',
-                  text: 'Yakin Ingin Menghapus Data ?',
-                  html: true,
-                  confirmButtonColor: '#d9534f',
-                  showCancelButton: true,
-                  },function(){
-                  window.location.href = getLink
-              });
-          return false;
-      });
+      // $('.btn-delete').on('click',function(){
+      //     var getLink = $(this).attr('href');
+      //     swal({
+      //             title: 'Delete Data',
+      //             text: 'Yakin Ingin Menghapus Data ?',
+      //             html: true,
+      //             confirmButtonColor: '#d9534f',
+      //             showCancelButton: true,
+      //             },function(){
+      //             window.location.href = getLink
+      //         });
+      //     return false;
+      // });
   });
 
   $(function () {

@@ -58,17 +58,26 @@
                 </tr>
                 </thead>
                 <tbody>
+                  <?php 
+                    $no = 0;
+                    foreach ($list_laporan as $value) {
+                      $no++;
+
+                  ?>
                   <tr>
-                    <td>1</td>
-                    <td>30 September 2019</td>
-                    <td>B1200055</td>
-                    <td>Speaker</td>
-                    <td>100</td>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>80</td>
+                    <td><?= $no ?></td>
+                    <td><?= date('F') ?></td>
+                    <td><?= $value->kode_barang; ?></td>
+                    <td><?= $value->nama_barang;?></td>
+                    <td><?= $value->stok_awal ?></td>
+                    <td><?= $value->total_barang_masuk ?></td>
+                    <td><?= $value->total_barang_keluar ?></td>
+                    <td><?= $value->sisa_stok ?></td>
                     <!-- <td>Stock Aman</td> -->
                   </tr>
+                  <?php 
+                  } 
+                  ?>
                 </tbody>
               </table>
             </div>

@@ -62,11 +62,17 @@
                 <label for="role" style="width:73%;">Role</label>
                 <select class="form-control" name="role" style="width:11%;margin-right: 18px;">
                   <?php if($d->role == 1){ ?>
-                  <option value="1" selected="">User Admin</option>
-                  <option value="0">User Biasa</option>
+                  <option value="1" selected="">Admin Gudang</option>
+                  <option value="2">Purchasing</option>
+                  <option value="3">Manager</option>
+                  <?php }elseif ($d->role == 2) { ?>
+                  <option value="1">Admin Gudang</option>
+                  <option value="2" selected=>Purchasing</option>
+                  <option value="3">Manager</option>
                   <?php }else{ ?>
-                  <option value="1">User Admin</option>
-                  <option value="0" selected="">User Biasa</option>
+                    <option value="1">Admin Gudang</option>
+                    <option value="2"=>Purchasing</option>
+                    <option value="3" selected>Manager</option>
                   <?php } ?>
                 </select>
             </div>
